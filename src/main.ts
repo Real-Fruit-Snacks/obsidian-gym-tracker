@@ -292,7 +292,7 @@ export default class GymTrackerPlugin extends Plugin {
 
 	async activateView() {
 		this.app.workspace.detachLeavesOfType(VIEW_TYPE_GYM_TRACKER);
-		const leaf = Platform.isMobileApp ? this.app.workspace.getLeaf(false) : this.app.workspace.getLeaf("tab");
+		const leaf = Platform.isMobile ? this.app.workspace.getLeaf(false) : this.app.workspace.getLeaf("tab");
 		await leaf.setViewState({ type: VIEW_TYPE_GYM_TRACKER, active: true });
 		this.app.workspace.revealLeaf(leaf);
 	}

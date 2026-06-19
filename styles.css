@@ -765,7 +765,7 @@
 	}
 }
 
-@media (max-width: 900px) {
+@container (max-width: 900px) {
 	.gym-shell {
 		padding: calc(24px + env(safe-area-inset-top)) 16px calc(128px + env(safe-area-inset-bottom));
 	}
@@ -861,7 +861,7 @@
 	}
 }
 
-@media (max-width: 640px) {
+@container (max-width: 640px) {
 	.gym-field-grid,
 	.gym-exercise-meta,
 	.gym-ruck-grid,
