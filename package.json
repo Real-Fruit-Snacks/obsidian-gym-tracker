@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-gym-tracker",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Track gym workouts from Obsidian on mobile and desktop.",
 	"main": "main.js",
 	"scripts": {
