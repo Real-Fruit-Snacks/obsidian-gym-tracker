@@ -1,0 +1,1066 @@
+.gym-tracker-view {
+	--gym-border: var(--background-modifier-border);
+	--gym-panel: var(--background-primary);
+	--gym-muted: var(--text-muted);
+	--gym-accent: var(--interactive-accent);
+	container-type: inline-size;
+	height: 100%;
+	overflow: auto;
+}
+
+.gym-shell {
+	margin: 0 auto;
+	max-width: 1180px;
+	padding: calc(24px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom));
+	width: 100%;
+}
+
+.gym-header {
+	align-items: flex-start;
+	display: flex;
+	gap: 16px;
+	justify-content: space-between;
+	margin-bottom: 18px;
+}
+
+.gym-header h2,
+.gym-section-heading h3 {
+	letter-spacing: 0;
+	margin: 0;
+}
+
+.gym-header p {
+	color: var(--gym-muted);
+	margin: 6px 0 0;
+}
+
+.gym-header-actions,
+.gym-history-actions,
+.gym-form-footer,
+.gym-section-heading,
+.gym-exercise-top,
+.gym-set-heading,
+.gym-footer-actions,
+.gym-modal-actions,
+.gym-timer-controls {
+	align-items: center;
+	display: flex;
+	gap: 8px;
+}
+
+.gym-header-actions,
+.gym-history-actions,
+.gym-footer-actions,
+.gym-modal-actions,
+.gym-timer-controls {
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
+.gym-header-actions button,
+.gym-history-actions button,
+.gym-section-heading button,
+.gym-form-footer button,
+.gym-set-heading button,
+.gym-exercise-top button,
+.gym-modal-actions button,
+.gym-timer-controls button {
+	white-space: nowrap;
+}
+
+.gym-grid {
+	align-items: start;
+	display: grid;
+	gap: 16px;
+	grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+}
+
+.gym-tabs {
+	border-bottom: 1px solid var(--gym-border);
+	display: flex;
+	gap: 4px;
+	margin: 0 0 16px;
+	overflow-x: auto;
+	padding-bottom: 8px;
+	scroll-snap-type: x proximity;
+}
+
+.gym-tab {
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 8px;
+	color: var(--gym-muted);
+	flex: 0 0 auto;
+	font-weight: 600;
+	scroll-snap-align: start;
+	white-space: nowrap;
+}
+
+.gym-tab.is-active {
+	background: var(--background-secondary);
+	border-color: var(--gym-border);
+	color: var(--text-normal);
+}
+
+.gym-tab-content {
+	min-width: 0;
+}
+
+.gym-panel-grid {
+	display: grid;
+	gap: 16px;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gym-side {
+	display: grid;
+	gap: 16px;
+}
+
+.gym-panel {
+	background: var(--gym-panel);
+	border: 1px solid var(--gym-border);
+	border-radius: 8px;
+	min-width: 0;
+	padding: 16px;
+}
+
+.gym-section-heading {
+	column-gap: 16px;
+	justify-content: space-between;
+	margin: 20px 0 14px;
+	min-height: 36px;
+}
+
+.gym-workout-form > .gym-section-heading:first-child,
+.gym-panel > .gym-section-heading:first-child {
+	margin-top: 0;
+}
+
+.gym-section-heading button,
+.gym-set-heading button,
+.gym-exercise-top button {
+	flex: 0 0 auto;
+	margin-left: auto;
+}
+
+.gym-section-heading span {
+	color: var(--gym-muted);
+	font-size: var(--font-ui-small);
+}
+
+.gym-field-grid,
+.gym-exercise-meta,
+.gym-ruck-grid,
+.gym-set-row {
+	display: grid;
+	gap: 12px;
+}
+
+.gym-field-grid {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gym-exercise-meta {
+	grid-template-columns: minmax(180px, 0.85fr) minmax(220px, 1.15fr);
+}
+
+.gym-ruck-grid {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gym-ruck-summary {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	margin-top: 12px;
+}
+
+.gym-routine-bar {
+	align-items: end;
+	display: grid;
+	gap: 10px;
+	grid-template-columns: minmax(180px, 1fr) auto;
+	margin-bottom: 14px;
+}
+
+.gym-routine-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	justify-content: flex-end;
+}
+
+.gym-set-heading {
+	border-top: 1px solid var(--gym-border);
+	justify-content: space-between;
+	padding-top: 12px;
+}
+
+.gym-set-list {
+	display: grid;
+	gap: 8px;
+}
+
+.gym-set-row {
+	align-items: end;
+	background: var(--background-primary);
+	border: 1px solid var(--gym-border);
+	border-radius: 8px;
+	grid-template-columns: minmax(52px, 0.35fr) minmax(104px, 0.8fr) minmax(64px, 0.45fr) minmax(88px, 0.58fr) minmax(58px, 0.42fr) minmax(58px, 0.42fr) minmax(58px, 0.42fr) minmax(130px, 1fr) auto;
+	padding: 10px;
+}
+
+.gym-set-number {
+	align-self: center;
+	color: var(--gym-muted);
+	font-size: var(--font-ui-small);
+	font-weight: 700;
+}
+
+.gym-check-label {
+	align-items: center;
+	display: flex;
+	gap: 8px;
+	min-height: 32px;
+}
+
+.gym-check-label span {
+	color: var(--gym-muted);
+	font-size: var(--font-ui-smaller);
+	font-weight: 600;
+}
+
+.gym-set-actions {
+	align-items: end;
+	align-self: end;
+	display: flex;
+	gap: 6px;
+	justify-content: flex-end;
+}
+
+.gym-compact-button {
+	align-items: center;
+	display: inline-flex;
+	font-size: var(--font-ui-smaller);
+	font-weight: 700;
+	height: 34px;
+	justify-content: center;
+	min-width: 0;
+	padding: 0 12px;
+}
+
+.gym-set-remove,
+.gym-set-rest {
+	align-self: end;
+}
+
+.gym-set-remove {
+	border-color: var(--text-error);
+	color: var(--text-error);
+}
+
+.gym-set-remove:hover,
+.gym-set-remove:focus {
+	background: var(--background-modifier-error);
+	color: var(--text-on-accent);
+}
+
+.gym-label {
+	display: grid;
+	gap: 6px;
+	min-width: 0;
+}
+
+.gym-label span {
+	color: var(--gym-muted);
+	font-size: var(--font-ui-smaller);
+	font-weight: 600;
+}
+
+.gym-input,
+.gym-select,
+.gym-textarea {
+	box-sizing: border-box;
+	min-width: 0;
+	width: 100%;
+}
+
+.gym-textarea {
+	min-height: 84px;
+	resize: vertical;
+}
+
+.gym-exercise-list {
+	display: grid;
+	gap: 10px;
+}
+
+.gym-exercise-card {
+	background: var(--background-secondary);
+	border: 1px solid var(--gym-border);
+	border-radius: 8px;
+	display: grid;
+	gap: 12px;
+	padding: 12px;
+}
+
+.gym-exercise-top {
+	justify-content: space-between;
+}
+
+.gym-exercise-number {
+	color: var(--gym-muted);
+	font-size: var(--font-ui-small);
+	font-weight: 700;
+}
+
+.gym-form-footer {
+	border-top: 1px solid var(--gym-border);
+	justify-content: space-between;
+	margin-top: 16px;
+	padding-top: 16px;
+}
+
+.gym-footer-actions {
+	justify-content: flex-end;
+}
+
+.gym-volume-chip {
+	align-items: baseline;
+	display: flex;
+	gap: 8px;
+}
+
+.gym-volume-chip span,
+.gym-stat span,
+.gym-history-main span {
+	color: var(--gym-muted);
+	font-size: var(--font-ui-small);
+}
+
+.gym-stat-grid {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gym-stat {
+	background: var(--background-secondary);
+	border: 1px solid var(--gym-border);
+	border-radius: 8px;
+	display: grid;
+	gap: 4px;
+	padding: 12px;
+}
+
+.gym-history-list {
+	display: grid;
+	gap: 10px;
+}
+
+.gym-history-item,
+.gym-routine-item,
+.gym-library-item {
+	border-bottom: 1px solid var(--gym-border);
+	display: grid;
+	gap: 10px;
+	padding-bottom: 10px;
+}
+
+.gym-history-item:last-child,
+.gym-routine-item:last-child,
+.gym-library-item:last-child {
+	border-bottom: 0;
+	padding-bottom: 0;
+}
+
+.gym-library-item .gym-history-actions {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	justify-content: stretch;
+}
+
+.gym-library-item .gym-history-actions button {
+	min-width: 0;
+	width: 100%;
+}
+
+.gym-history-main {
+	display: grid;
+	gap: 4px;
+	min-width: 0;
+}
+
+.gym-history-main strong,
+.gym-history-main span,
+.gym-stat strong,
+.gym-stat span,
+.gym-record-item strong,
+.gym-record-item span,
+.gym-top-item span,
+.gym-top-item strong,
+.gym-exercise-history-item strong,
+.gym-exercise-history-item span {
+	overflow-wrap: anywhere;
+}
+
+.gym-danger-button {
+	color: var(--text-error);
+}
+
+.gym-action-add,
+.gym-action-edit,
+.gym-action-export,
+.gym-action-delete {
+	transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.gym-action-add:hover,
+.gym-action-add:focus {
+	background: rgba(var(--color-green-rgb), 0.18);
+	border-color: rgb(var(--color-green-rgb));
+	color: rgb(var(--color-green-rgb));
+}
+
+.gym-action-edit:hover,
+.gym-action-edit:focus {
+	background: var(--interactive-accent);
+	border-color: var(--interactive-accent);
+	color: var(--text-on-accent);
+}
+
+.gym-action-export:hover,
+.gym-action-export:focus {
+	background: rgba(var(--color-blue-rgb), 0.18);
+	border-color: rgb(var(--color-blue-rgb));
+	color: rgb(var(--color-blue-rgb));
+}
+
+.gym-action-delete:hover,
+.gym-action-delete:focus {
+	background: var(--background-modifier-error);
+	border-color: var(--text-error);
+	color: var(--text-on-accent);
+}
+
+.gym-set-remove:hover,
+.gym-set-remove:focus,
+.gym-action-remove:hover,
+.gym-action-remove:focus {
+	background: var(--background-modifier-error);
+	border-color: var(--text-error);
+	color: var(--text-on-accent);
+}
+
+.gym-tracker-view button:focus-visible,
+.gym-tracker-view input:focus-visible,
+.gym-tracker-view select:focus-visible,
+.gym-tracker-view textarea:focus-visible {
+	outline: 2px solid var(--interactive-accent);
+	outline-offset: 2px;
+}
+
+.gym-tracker-view button:disabled,
+.gym-tracker-view select:disabled,
+.gym-tracker-view input:disabled {
+	cursor: not-allowed;
+	opacity: 0.52;
+}
+
+.gym-tracker-view button:disabled:hover,
+.gym-tracker-view button:disabled:focus {
+	background: var(--interactive-normal);
+	border-color: var(--background-modifier-border);
+	color: var(--text-muted);
+}
+
+.gym-chip-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 2px;
+}
+
+.gym-chip {
+	background: var(--background-secondary);
+	border: 1px solid var(--gym-border);
+	border-radius: 999px;
+	color: var(--gym-muted);
+	font-size: var(--font-ui-smaller);
+	font-weight: 600;
+	line-height: 1.6;
+	padding: 1px 8px;
+}
+
+.gym-muted-text {
+	color: var(--gym-muted);
+	font-size: var(--font-ui-small);
+}
+
+.gym-empty-state {
+	border: 1px dashed var(--gym-border);
+	border-radius: 8px;
+	color: var(--gym-muted);
+	padding: 20px;
+	text-align: center;
+}
+
+.gym-settings-textarea {
+	min-height: 160px;
+	min-width: min(520px, 100%);
+}
+
+.gym-timer-display {
+	align-items: center;
+	background: var(--background-secondary);
+	border: 1px solid var(--gym-border);
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 12px;
+	min-height: 74px;
+}
+
+.gym-timer-display strong {
+	font-size: 2.2em;
+	letter-spacing: 0;
+}
+
+.gym-timer-controls {
+	justify-content: center;
+}
+
+.gym-bar-chart,
+.gym-record-list,
+.gym-routine-list,
+.gym-top-list,
+.gym-library-list,
+.gym-exercise-history-list {
+	display: grid;
+	gap: 10px;
+}
+
+.gym-bar-row {
+	align-items: center;
+	display: grid;
+	gap: 8px;
+	grid-template-columns: 44px minmax(80px, 1fr) minmax(72px, auto);
+}
+
+.gym-bar-label,
+.gym-bar-value,
+.gym-record-date {
+	color: var(--gym-muted);
+	font-size: var(--font-ui-small);
+}
+
+.gym-bar-track {
+	background: var(--background-secondary);
+	border: 1px solid var(--gym-border);
+	border-radius: 999px;
+	height: 10px;
+	overflow: hidden;
+}
+
+.gym-bar-fill {
+	background: var(--gym-accent);
+	height: 100%;
+	min-width: 4px;
+}
+
+.gym-top-list {
+	border-top: 1px solid var(--gym-border);
+	margin-top: 12px;
+	padding-top: 12px;
+}
+
+.gym-library-filter {
+	align-items: end;
+	display: grid;
+	gap: 12px;
+	grid-template-columns: minmax(180px, 1fr) auto;
+	margin-bottom: 12px;
+}
+
+.gym-library-count {
+	color: var(--gym-muted);
+	font-size: var(--font-ui-small);
+	padding-bottom: 8px;
+	white-space: nowrap;
+}
+
+.gym-top-item,
+.gym-record-item,
+.gym-exercise-history-item {
+	background: var(--background-secondary);
+	border: 1px solid var(--gym-border);
+	border-radius: 8px;
+	display: grid;
+	gap: 4px;
+	padding: 10px;
+}
+
+.gym-top-item {
+	align-items: center;
+	grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.gym-record-item {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.gym-insight-grid {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	margin: 12px 0;
+}
+
+.gym-calendar-layout {
+	align-items: start;
+	display: grid;
+	gap: 16px;
+	grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+}
+
+.gym-calendar-heading {
+	align-items: center;
+	display: grid;
+	gap: 8px;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	margin-bottom: 14px;
+}
+
+.gym-calendar-title {
+	display: grid;
+	gap: 2px;
+	justify-items: center;
+	min-width: 0;
+	text-align: center;
+}
+
+.gym-calendar-title h3 {
+	letter-spacing: 0;
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+
+.gym-calendar-title span {
+	color: var(--gym-muted);
+	font-size: var(--font-ui-small);
+}
+
+.gym-calendar-controls {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+}
+
+.gym-calendar-detail-actions {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	justify-content: flex-end;
+}
+
+.gym-calendar-weekdays,
+.gym-calendar-grid {
+	display: grid;
+	gap: 6px;
+	grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.gym-calendar-weekdays {
+	color: var(--gym-muted);
+	font-size: var(--font-ui-small);
+	font-weight: 700;
+	margin-bottom: 6px;
+	text-align: center;
+}
+
+.gym-calendar-day {
+	align-items: start;
+	background: var(--background-secondary);
+	border: 1px solid var(--gym-border);
+	border-radius: 8px;
+	color: var(--text-normal);
+	display: grid;
+	gap: 6px;
+	justify-items: start;
+	min-height: 78px;
+	min-width: 0;
+	padding: 8px;
+	text-align: left;
+	width: 100%;
+}
+
+.gym-calendar-day:hover,
+.gym-calendar-day:focus {
+	border-color: var(--interactive-accent);
+}
+
+.gym-calendar-day.is-muted {
+	opacity: 0.48;
+}
+
+.gym-calendar-day.is-today {
+	border-color: var(--interactive-accent);
+}
+
+.gym-calendar-day.is-selected {
+	background: var(--interactive-accent);
+	border-color: var(--interactive-accent);
+	color: var(--text-on-accent);
+}
+
+.gym-calendar-day.has-workout:not(.is-selected) .gym-calendar-marker {
+	color: var(--text-accent);
+}
+
+.gym-calendar-day-number {
+	font-weight: 700;
+	line-height: 1;
+}
+
+.gym-calendar-marker {
+	font-size: var(--font-ui-smaller);
+	font-weight: 700;
+	line-height: 1.25;
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.gym-calendar-marker-full,
+.gym-calendar-marker-short {
+	display: block;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.gym-calendar-marker-short {
+	display: none;
+}
+
+@container (max-width: 980px) {
+	.gym-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.gym-panel-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.gym-calendar-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.gym-side {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 900px) {
+	.gym-shell {
+		padding: calc(24px + env(safe-area-inset-top)) 16px calc(128px + env(safe-area-inset-bottom));
+	}
+
+	.gym-header,
+	.gym-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
+	.gym-header-actions {
+		justify-content: stretch;
+	}
+
+	.gym-header-actions button {
+		flex: 1 1 140px;
+	}
+}
+
+@container (max-width: 760px) {
+	.gym-shell {
+		padding: calc(24px + env(safe-area-inset-top)) 16px calc(128px + env(safe-area-inset-bottom));
+	}
+
+	.gym-header {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
+	.gym-header-actions {
+		justify-content: stretch;
+	}
+
+	.gym-header-actions button {
+		flex: 1 1 150px;
+	}
+
+	.gym-tabs {
+		margin-left: -2px;
+		margin-right: -2px;
+	}
+
+	.gym-tab {
+		font-size: var(--font-ui-small);
+		padding: 8px 12px;
+	}
+
+	.gym-side {
+		grid-template-columns: 1fr;
+	}
+
+	.gym-exercise-meta {
+		grid-template-columns: 1fr;
+	}
+
+	.gym-ruck-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.gym-library-filter {
+		grid-template-columns: 1fr;
+	}
+
+	.gym-library-count {
+		padding-bottom: 0;
+	}
+
+	.gym-routine-bar {
+		grid-template-columns: 1fr;
+	}
+
+	.gym-routine-actions {
+		justify-content: stretch;
+	}
+
+	.gym-routine-actions button {
+		flex: 1 1 140px;
+	}
+
+	.gym-calendar-day {
+		min-height: 64px;
+		padding: 6px;
+	}
+
+	.gym-set-row {
+		grid-template-columns: minmax(58px, 0.55fr) minmax(118px, 1fr) repeat(3, minmax(68px, 0.7fr)) auto;
+	}
+
+	.gym-set-row .gym-check-label,
+	.gym-set-row .gym-label:last-of-type,
+	.gym-set-actions {
+		grid-column: span 2;
+	}
+}
+
+@media (max-width: 640px) {
+	.gym-field-grid,
+	.gym-exercise-meta,
+	.gym-ruck-grid,
+	.gym-ruck-summary,
+	.gym-set-row,
+	.gym-stat-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.gym-panel {
+		padding: 12px;
+	}
+
+	.gym-form-footer,
+	.gym-history-actions,
+	.gym-footer-actions,
+	.gym-routine-actions,
+	.gym-timer-controls {
+		align-items: stretch;
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
+	.gym-history-actions button,
+	.gym-form-footer button,
+	.gym-footer-actions button,
+	.gym-routine-actions button,
+	.gym-timer-controls button {
+		width: 100%;
+	}
+}
+
+@container (max-width: 520px) {
+	.gym-field-grid,
+	.gym-exercise-meta,
+	.gym-ruck-grid,
+	.gym-ruck-summary,
+	.gym-set-row,
+	.gym-insight-grid,
+	.gym-stat-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.gym-section-heading,
+	.gym-exercise-top,
+	.gym-set-heading {
+		align-items: stretch;
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
+	.gym-calendar-heading {
+		align-items: center;
+		grid-template-columns: auto minmax(0, 1fr) auto;
+	}
+
+	.gym-calendar-title {
+		justify-items: center;
+		text-align: center;
+	}
+
+	.gym-calendar-title h3 {
+		font-size: 1.25em;
+	}
+
+	.gym-calendar-controls {
+		display: contents;
+	}
+
+	.gym-calendar-controls button,
+	.gym-calendar-heading > button {
+		margin-left: 0;
+		min-width: 0;
+	}
+
+	.gym-calendar-controls button:first-child {
+		grid-column: 1 / -1;
+		grid-row: 2;
+		justify-self: stretch;
+	}
+
+	.gym-calendar-controls button:last-child {
+		grid-column: 3;
+		grid-row: 1;
+	}
+
+	.gym-calendar-heading > button {
+		grid-column: 1;
+		grid-row: 1;
+	}
+
+	.gym-calendar-weekdays,
+	.gym-calendar-grid {
+		gap: 3px;
+	}
+
+	.gym-calendar-weekdays {
+		font-size: 0.72em;
+	}
+
+	.gym-calendar-day {
+		border-radius: 6px;
+		gap: 3px;
+		min-height: 52px;
+		padding: 4px;
+	}
+
+	.gym-calendar-day-number {
+		font-size: 0.78em;
+	}
+
+	.gym-calendar-marker {
+		font-size: 0.62em;
+		letter-spacing: 0;
+	}
+
+	.gym-calendar-marker-full {
+		display: none;
+	}
+
+	.gym-calendar-marker-short {
+		display: block;
+	}
+
+	.gym-calendar-detail-actions {
+		align-items: stretch;
+		display: grid;
+		grid-template-columns: 1fr;
+		justify-content: stretch;
+	}
+
+	.gym-calendar-detail-actions button {
+		width: 100%;
+	}
+
+	.gym-form-footer,
+	.gym-history-actions,
+	.gym-footer-actions,
+	.gym-modal-actions,
+	.gym-timer-controls {
+		align-items: stretch;
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
+	.gym-history-actions button,
+	.gym-form-footer button,
+	.gym-footer-actions button,
+	.gym-section-heading button,
+	.gym-exercise-top button,
+	.gym-set-heading button,
+	.gym-modal-actions button {
+		margin-left: 0;
+		width: 100%;
+	}
+
+	.gym-library-item .gym-history-actions {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.gym-timer-controls button {
+		width: 100%;
+	}
+
+	.gym-set-row .gym-check-label,
+	.gym-set-row .gym-label:last-of-type,
+	.gym-set-actions {
+		grid-column: auto;
+	}
+
+	.gym-set-actions {
+		justify-content: flex-start;
+	}
+
+	.gym-bar-row,
+	.gym-top-item {
+		grid-template-columns: 1fr;
+	}
+}
+
+@container (max-width: 360px) {
+	.gym-shell {
+		padding: calc(24px + env(safe-area-inset-top)) 12px calc(128px + env(safe-area-inset-bottom));
+	}
+
+	.gym-panel {
+		padding: 12px;
+	}
+
+	.gym-header h2 {
+		font-size: 1.35em;
+	}
+
+	.gym-calendar-day {
+		min-height: 48px;
+		padding: 4px;
+	}
+
+	.gym-calendar-marker {
+		font-size: 10px;
+	}
+}
