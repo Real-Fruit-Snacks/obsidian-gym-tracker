@@ -2,6 +2,8 @@
 
 Gym Tracker is a mobile and desktop Obsidian plugin for logging strength workouts and rucks without leaving your vault. It keeps structured workout data inside Obsidian, provides routines and progress views, and can export sessions as Markdown notes.
 
+**[View the Gym Tracker website](https://real-fruit-snacks.github.io/obsidian-gym-tracker/)**
+
 ## Features
 
 - Log strength workouts with exercises, sets, reps, weight, RPE, RIR, completion state, and notes.

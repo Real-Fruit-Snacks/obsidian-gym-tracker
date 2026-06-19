@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Gym Tracker is a local-first Obsidian plugin for strength workouts, rucks, routines, progress, GPX imports, and training history.">
+  <meta name="theme-color" content="#17171f">
+  <meta property="og:title" content="Gym Tracker for Obsidian">
+  <meta property="og:description" content="Track strength workouts and rucks without leaving your vault.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://real-fruit-snacks.github.io/obsidian-gym-tracker/">
+  <meta property="og:image" content="https://real-fruit-snacks.github.io/obsidian-gym-tracker/assets/calendar-mobile.png">
+  <meta property="og:image:alt" content="Gym Tracker calendar view running in Obsidian on a phone">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gym Tracker for Obsidian">
+  <meta name="twitter:description" content="Track strength workouts and rucks without leaving your vault.">
+  <meta name="twitter:image" content="https://real-fruit-snacks.github.io/obsidian-gym-tracker/assets/calendar-mobile.png">
+  <title>Gym Tracker for Obsidian</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Gym Tracker home">Gym Tracker</a>
+    <nav aria-label="Primary navigation">
+      <a href="#workflows">Workflows</a>
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+      <a class="nav-action" href="https://github.com/Real-Fruit-Snacks/obsidian-gym-tracker">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Obsidian plugin · mobile and desktop</p>
+        <h1 id="hero-title">Gym Tracker</h1>
+        <p class="hero-copy">Strength sessions, rucks, routines, records, and notes. Kept together in the vault you already use.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#install">Install Gym Tracker</a>
+          <a class="button button-secondary" href="https://github.com/Real-Fruit-Snacks/obsidian-gym-tracker">View source</a>
+        </div>
+      </div>
+      <div class="hero-facts" aria-label="Plugin highlights">
+        <span>Local-first</span>
+        <span>Strength + ruck</span>
+        <span>GPX import</span>
+        <span>Markdown export</span>
+      </div>
+    </section>
+
+    <section class="intro band" id="workflows">
+      <div class="section-inner intro-grid">
+        <div>
+          <p class="eyebrow dark">A training log that belongs to you</p>
+          <h2>From the first set to the long view.</h2>
+        </div>
+        <p class="lead">Build a workout from scratch or load a routine, mark sets as you complete them, run a rest timer, and come back later to see the history in context. Gym Tracker keeps the workflow focused without turning your vault into a spreadsheet.</p>
+      </div>
+    </section>
+
+    <section class="product-story band band-dark">
+      <div class="section-inner story-grid">
+        <figure class="product-shot product-shot-wide">
+          <button class="image-button" type="button" data-image="assets/ruck-desktop.png" data-alt="Ruck workout form after importing a GPX route">
+            <img src="assets/ruck-desktop.png" alt="Ruck workout form after importing a GPX route" loading="lazy">
+          </button>
+          <figcaption>Ruck mode with GPX-derived distance, duration, elevation, and route.</figcaption>
+        </figure>
+        <div class="story-copy">
+          <p class="eyebrow">Ruck tracking</p>
+          <h2>Let your GPS app record. Let Obsidian remember.</h2>
+          <p>Import a GPX file and Gym Tracker fills the route details it can calculate. Add pack weight and perceived effort, then save a complete training record alongside the rest of your notes.</p>
+          <dl class="metric-list">
+            <div><dt>Route</dt><dd>GPX track name and date</dd></div>
+            <div><dt>Effort</dt><dd>Pace, elevation, RPE, load-distance</dd></div>
+            <div><dt>Ownership</dt><dd>Local plugin data and Markdown exports</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="calendar-story band">
+      <div class="section-inner story-grid story-grid-reverse">
+        <div class="story-copy">
+          <p class="eyebrow dark">Training history</p>
+          <h2>Find the workout by the day it happened.</h2>
+          <p>The Calendar view puts strength sessions and rucks back on a timeline. Select any date to review what happened, edit the entry, or create the workout you forgot to log.</p>
+          <ul class="plain-list">
+            <li>Month navigation with compact workout markers</li>
+            <li>Selected-day details and actions</li>
+            <li>Purpose-built mobile calendar layout</li>
+          </ul>
+        </div>
+        <figure class="product-shot product-shot-phone">
+          <button class="image-button" type="button" data-image="assets/calendar-mobile.png" data-alt="Gym Tracker calendar on an Android phone">
+            <img src="assets/calendar-mobile.png" alt="Gym Tracker calendar on an Android phone" loading="lazy">
+          </button>
+          <figcaption>Calendar and selected-day history on mobile.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="feature-band band" id="features">
+      <div class="section-inner">
+        <p class="eyebrow dark">The full training loop</p>
+        <h2>Useful during the workout. Useful months later.</h2>
+        <div class="feature-grid">
+          <article><span>01</span><h3>Workout drafts</h3><p>Track exercise notes, set type, reps, weight, RPE, RIR, completion, and session volume.</p></article>
+          <article><span>02</span><h3>Reusable routines</h3><p>Save a training template, edit it later, and load it into a fresh workout without rebuilding every set.</p></article>
+          <article><span>03</span><h3>Exercise progress</h3><p>Review recent sessions, estimated one-rep max, best volume, and a simple progression suggestion.</p></article>
+          <article><span>04</span><h3>Rest timer</h3><p>Start rest from a set, adjust the interval, and return directly to the workout when the timer is done.</p></article>
+          <article><span>05</span><h3>Exercise library</h3><p>Filter by name, muscle, equipment, or category, then add an exercise or jump to its history.</p></article>
+          <article><span>06</span><h3>Vault-friendly exports</h3><p>Create Dataview-ready Markdown notes with YAML properties and optional links to exercise notes.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery band" id="screenshots" aria-labelledby="gallery-title">
+      <div class="section-inner">
+        <div class="section-heading-row">
+          <div><p class="eyebrow dark">Built for the screen in your hand</p><h2 id="gallery-title">One plugin, both places.</h2></div>
+          <p>Log in the gym on mobile. Review, organize, and export from desktop.</p>
+        </div>
+        <div class="gallery-grid">
+          <figure class="product-shot">
+            <button class="image-button" type="button" data-image="assets/workout-mobile.png" data-alt="Workout draft on mobile">
+              <img src="assets/workout-mobile.png" alt="Workout draft on mobile" loading="lazy">
+            </button>
+            <figcaption>Workout draft</figcaption>
+          </figure>
+          <figure class="product-shot">
+            <button class="image-button" type="button" data-image="assets/calendar-mobile.png" data-alt="Calendar view on mobile">
+              <img src="assets/calendar-mobile.png" alt="Calendar view on mobile" loading="lazy">
+            </button>
+            <figcaption>Calendar history</figcaption>
+          </figure>
+          <figure class="product-shot">
+            <button class="image-button" type="button" data-image="assets/library-mobile.png" data-alt="Exercise library on mobile">
+              <img src="assets/library-mobile.png" alt="Exercise library on mobile" loading="lazy">
+            </button>
+            <figcaption>Exercise library</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="privacy band band-dark">
+      <div class="section-inner privacy-grid">
+        <div><p class="eyebrow">Local by design</p><h2>Your training data is not a product.</h2></div>
+        <div>
+          <p>Gym Tracker stores workout data through Obsidian and reads GPX files locally. It does not require an account or send workout and location data to an external service.</p>
+          <p>Export a JSON backup or create Markdown workout notes whenever you want a portable copy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="install band" id="install">
+      <div class="section-inner install-grid">
+        <div>
+          <p class="eyebrow dark">Install</p>
+          <h2>Bring Gym Tracker into your vault.</h2>
+          <p class="lead">Download the three release files, place them in the plugin folder, and enable Gym Tracker from Obsidian settings.</p>
+          <a class="button button-dark" href="https://github.com/Real-Fruit-Snacks/obsidian-gym-tracker/releases">Open releases</a>
+        </div>
+        <ol class="install-steps">
+          <li><span>1</span><div><strong>Download</strong><p>Get <code>main.js</code>, <code>manifest.json</code>, and <code>styles.css</code> from the latest release.</p></div></li>
+          <li><span>2</span><div><strong>Create the folder</strong><p>Use <code>.obsidian/plugins/gym-tracker/</code> inside your vault.</p></div></li>
+          <li><span>3</span><div><strong>Enable</strong><p>Reload Obsidian, then enable Gym Tracker under Community plugins.</p></div></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="section-inner footer-inner">
+      <div><strong>Gym Tracker</strong><p>Made by Real-Fruit-Snacks for Obsidian.</p></div>
+      <div class="footer-links"><a href="https://github.com/Real-Fruit-Snacks/obsidian-gym-tracker">GitHub</a><a href="https://github.com/Real-Fruit-Snacks/obsidian-gym-tracker/issues">Issues</a><a href="https://github.com/Real-Fruit-Snacks/obsidian-gym-tracker/blob/main/LICENSE">MIT License</a></div>
+    </div>
+  </footer>
+
+  <dialog class="lightbox" aria-label="Screenshot preview">
+    <button class="lightbox-close" type="button" aria-label="Close screenshot preview">Close</button>
+    <img alt="">
+  </dialog>
+</body>
+</html>

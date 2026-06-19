@@ -23,7 +23,7 @@
 	"bugs": {
 		"url": "https://github.com/Real-Fruit-Snacks/obsidian-gym-tracker/issues"
 	},
-	"homepage": "https://github.com/Real-Fruit-Snacks/obsidian-gym-tracker#readme",
+	"homepage": "https://real-fruit-snacks.github.io/obsidian-gym-tracker/",
 	"devDependencies": {
 		"@types/node": "^24.0.0",
 		"builtin-modules": "^5.0.0",
