@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gym Tracker -- {{REPO_DESC_LONG}}">
+    <meta name="keywords" content="Gym Tracker, plugin, Gym Tracker, sub vault, productivity, knowledge management, note taking">
+    <title>Gym Tracker -- Gym Tracker Plugin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ==================== NAV ==================== -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <svg class="nav-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path><line x1="12" y1="11" x2="12" y2="17"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg>
+                Gym Tracker
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#install">Install</a>
+                <a href="{{GITHUB_URL}}" class="nav-github" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero">
+        <div class="hero-glow hero-glow--1"></div>
+        <div class="hero-glow hero-glow--2"></div>
+        <div class="hero-grid"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">Open Source &middot; MIT License</div>
+            <h1 class="hero-title">
+                Mobile and desktop Obsidian plugin for logging workouts.
+            </h1>
+            <p class="hero-subtitle">
+                Gym Tracker keeps structured workout data inside Obsidian, provides routines and progress views, and can export sessions as Markdown notes.
+            </p>
+            <div class="hero-actions">
+                <a href="https://github.com/Real-Fruit-Snacks/obsidian-gym-tracker/releases/latest" class="btn btn--primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download
+                </a>
+                <a href="{{GITHUB_URL}}" class="btn btn--ghost" target="_blank" rel="noopener">
+                    View on GitHub
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Floating mock UI cards -->
+        <div class="hero-visual">
+            <div class="mock-window">
+                <div class="mock-titlebar">
+                    <span class="mock-dot mock-dot--red"></span>
+                    <span class="mock-dot mock-dot--yellow"></span>
+                    <span class="mock-dot mock-dot--green"></span>
+                    <span class="mock-titlebar-text">Gym Tracker</span>
+                </div>
+                <div class="mock-body">
+                    <div class="mock-sidebar">
+                        <div class="mock-folder mock-folder--active">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            My Project
+                        </div>
+                        <div class="mock-file mock-file--nested">research-notes.md</div>
+                        <div class="mock-file mock-file--nested">architecture.md</div>
+                        <div class="mock-file mock-file--nested">todo.md</div>
+                        <div class="mock-folder mock-folder--hidden">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            Other Work
+                        </div>
+                        <div class="mock-folder mock-folder--hidden">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            Archive
+                        </div>
+                    </div>
+                    <div class="mock-editor">
+                        <div class="mock-editor-line mock-editor-line--heading"># Architecture</div>
+                        <div class="mock-editor-line">The system uses a modular</div>
+                        <div class="mock-editor-line">approach to separate core</div>
+                        <div class="mock-editor-line">logic from the UI layer.</div>
+                        <div class="mock-editor-line mock-editor-line--empty"></div>
+                        <div class="mock-editor-line mock-editor-line--tag">#design #system</div>
+                    </div>
+                </div>
+                <div class="mock-statusbar">
+                    <span class="mock-statusbar-vault">Sub-vault: My Project</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FEATURES ==================== -->
+    <section class="features" id="features">
+        <div class="section-inner">
+            <div class="section-header">
+                <p class="section-label">Features</p>
+                <h2 class="section-title">Track your gains in Obsidian.</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card" data-reveal>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v18M18 3v18M2 6h20M2 18h20M9 10h6v4H9z"/></svg>
+                    </div>
+                    <h3>Detailed Logging</h3>
+                    <p>Log strength workouts with exercises, sets, reps, weight, RPE, RIR, completion state, and notes.</p>
+                </div>
+
+                <div class="feature-card" data-reveal>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h3>Ruck Tracking & GPX</h3>
+                    <p>Track rucks with distance, duration, and pack weight. Import GPX files to automatically fill ruck data.</p>
+                </div>
+
+                <div class="feature-card" data-reveal>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    </div>
+                    <h3>Insights & Calendar</h3>
+                    <p>Review weekly volume, workout totals, streaks, exercise progress, and personal records. Browse workouts by month.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section class="how" id="how-it-works">
+        <div class="section-inner">
+            <div class="section-header">
+                <p class="section-label">Workflow</p>
+                <h2 class="section-title">Track. Review. Export.</h2>
+            </div>
+
+            <div class="steps-timeline">
+                <div class="step" data-reveal>
+                    <div class="step-marker">
+                        <span class="step-num">1</span>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3>Log Workouts</h3>
+                        <p>Build a strength or ruck draft, load routines, import GPX files, run the rest timer, and save the session.</p>
+                    </div>
+                </div>
+
+                <div class="step" data-reveal>
+                    <div class="step-marker">
+                        <span class="step-num">2</span>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3>Review Insights</h3>
+                        <p>Review totals, weekly trends, exercise progress, progression suggestions, and personal records.</p>
+                    </div>
+                </div>
+
+                <div class="step" data-reveal>
+                    <div class="step-marker">
+                        <span class="step-num">3</span>
+                    </div>
+                    <div class="step-content">
+                        <h3>Export as Markdown</h3>
+                        <p>Export workouts to Dataview-friendly Markdown with YAML frontmatter to perfectly integrate with your vault.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== INSTALL ==================== -->
+    <section class="install" id="install">
+        <div class="section-inner">
+            <div class="section-header">
+                <p class="section-label">Get Started</p>
+                <h2 class="section-title">Install in under a minute.</h2>
+            </div>
+
+            <div class="install-grid">
+                <div class="install-card" data-reveal>
+                    <div class="install-card-header">
+                        <span class="install-card-label">Recommended</span>
+                        <h3>Community Plugins</h3>
+                    </div>
+                    <ol>
+                        <li>Open Obsidian Settings and navigate to <strong>Community Plugins</strong>.</li>
+                        <li>Browse and search for <strong>Gym Tracker</strong>.</li>
+                        <li>Install and Enable the plugin.</li>
+                    </ol>
+                </div>
+
+                <div class="install-card" data-reveal>
+                    <div class="install-card-header">
+                        <h3>Manual</h3>
+                    </div>
+                    <ol>
+                        <li>Download <code>main.js</code>, <code>manifest.json</code>, and <code>styles.css</code> from the <a href="https://github.com/Real-Fruit-Snacks/obsidian-gym-tracker/releases/latest" target="_blank" rel="noopener">latest release</a>.</li>
+                        <li>Create <code>.obsidian/plugins/gym-tracker/</code> inside your vault.</li>
+                        <li>Place the files inside that folder and reload Obsidian.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="section-inner footer-inner">
+            <div class="footer-left">
+                <svg class="footer-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+                <span>Gym Tracker</span>
+            </div>
+            <p class="footer-copy">Built for <a href="https://obsidian.md" target="_blank" rel="noopener">Obsidian</a>. Open source under the MIT License. Created by <a href="https://github.com/Real-Fruit-Snacks" target="_blank" rel="noopener">Real-Fruit-Snacks</a>.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ---- Sticky nav ----
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('nav--scrolled', window.scrollY > 40);
+        });
+
+        // ---- Scroll reveal ----
+        const revealEls = document.querySelectorAll('[data-reveal]');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => revealObserver.observe(el));
+
+        // ---- Smooth anchor scroll ----
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+

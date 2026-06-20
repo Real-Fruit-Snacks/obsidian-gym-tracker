@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#89b4fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#cba6f7;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <!-- Sleek dark background with rounded corners -->
+  <rect width="512" height="512" rx="120" fill="#1e1e2e" />
+  
+  <!-- Geometric diamond with modern gradient and subtle glow -->
+  <path d="M150 256 L256 150 L362 256 L256 362 Z" fill="url(#grad)" filter="url(#glow)" />
+  
+  <!-- Center cutout to give it a tech/hardware feel -->
+  <circle cx="256" cy="256" r="40" fill="#1e1e2e" />
+</svg>
