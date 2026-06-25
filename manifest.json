@@ -1,11 +1,11 @@
 {
-	"id": "gym-tracker",
-	"name": "Gym Tracker",
-	"version": "1.0.0",
-	"minAppVersion": "1.5.0",
-	"description": "Track gym workouts, exercise volume, streaks, and history from Obsidian on mobile and desktop.",
-	"author": "Real-Fruit-Snacks",
-	"authorUrl": "https://github.com/Real-Fruit-Snacks",
-	"fundingUrl": "",
-	"isDesktopOnly": false
+  "id": "gym-tracker",
+  "name": "Gym Tracker",
+  "version": "1.0.1",
+  "minAppVersion": "1.5.0",
+  "description": "Track gym workouts, exercise volume, streaks, and history on mobile and desktop.",
+  "author": "Real-Fruit-Snacks",
+  "authorUrl": "https://github.com/Real-Fruit-Snacks",
+  "fundingUrl": "",
+  "isDesktopOnly": false
 }
