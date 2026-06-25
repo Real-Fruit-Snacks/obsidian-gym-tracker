@@ -1764,7 +1764,7 @@ class GymTrackerView extends ItemView {
 	}
 
 	private importGpxFile() {
-		const input = document.createElement("input");
+		const input = activeDocument.createElement("input");
 		input.type = "file";
 		input.accept = ".gpx,application/gpx+xml,text/xml,application/xml";
 		input.addEventListener("change", async () => {
@@ -1917,7 +1917,7 @@ class GymTrackerSettingTab extends PluginSettingTab {
 		const { containerEl } = this;
 		containerEl.empty();
 
-		containerEl.createEl("h2", { text: "Gym Tracker" });
+		(new Setting(containerEl) as any).setHeading().setName("Gym Tracker");
 
 		new Setting(containerEl)
 			.setName("Demo data")
@@ -2287,7 +2287,7 @@ function createChipRow(parent: HTMLElement, values: string[]) {
 
 function parseGpxSummary(gpxText: string, fileName: string): GpxImportSummary | null {
 	const document = new DOMParser().parseFromString(gpxText, "application/xml");
-	if (document.querySelector("parsererror")) {
+	if (activeDocument.querySelector("parsererror")) {
 		return null;
 	}
 
@@ -2329,8 +2329,8 @@ function parseGpxSummary(gpxText: string, fileName: string): GpxImportSummary | 
 
 function getGpxPoints(document: Document) {
 	return [
-		...Array.from(document.getElementsByTagName("trkpt")),
-		...Array.from(document.getElementsByTagName("rtept"))
+		...Array.from(activeDocument.getElementsByTagName("trkpt")),
+		...Array.from(activeDocument.getElementsByTagName("rtept"))
 	]
 		.map((point) => {
 			const lat = Number(point.getAttribute("lat"));
@@ -2350,9 +2350,9 @@ function getGpxPoints(document: Document) {
 }
 
 function getGpxName(document: Document, fileName: string) {
-	const trackName = document.getElementsByTagName("trk")[0]?.getElementsByTagName("name")[0]?.textContent;
-	const routeName = document.getElementsByTagName("rte")[0]?.getElementsByTagName("name")[0]?.textContent;
-	const metadataName = document.getElementsByTagName("metadata")[0]?.getElementsByTagName("name")[0]?.textContent;
+	const trackName = activeDocument.getElementsByTagName("trk")[0]?.getElementsByTagName("name")[0]?.textContent;
+	const routeName = activeDocument.getElementsByTagName("rte")[0]?.getElementsByTagName("name")[0]?.textContent;
+	const metadataName = activeDocument.getElementsByTagName("metadata")[0]?.getElementsByTagName("name")[0]?.textContent;
 	return (trackName || routeName || metadataName || fileName.replace(/\.gpx$/i, "")).trim();
 }
 

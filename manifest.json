@@ -1,7 +1,7 @@
 {
   "id": "gym-tracker",
   "name": "Gym Tracker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "minAppVersion": "1.5.0",
   "description": "Track gym workouts, exercise volume, streaks, and history on mobile and desktop.",
   "author": "Real-Fruit-Snacks",
