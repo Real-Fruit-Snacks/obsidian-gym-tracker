@@ -1,0 +1,184 @@
+/*
+ * Terminal Workbench — design tokens
+ * https://github.com/Real-Fruit-Snacks/terminal-workbench-design-system
+ *
+ * Drop-in CSS custom properties implementing THEME-SPEC.md.
+ * Dark is the default; light applies automatically via
+ * prefers-color-scheme, or explicitly with data-theme="light" /
+ * data-theme="dark" on <html>.
+ *
+ * Overriding --twb-accent (and friends) re-derives every tint in
+ * browsers with color-mix support.
+ */
+
+/* ---------- Dark (default) ---------- */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Accent ramp */
+  --twb-accent: #63f2ab;
+  --twb-accent-alt: #6bdcff;
+  --twb-warm: #f0c674;
+
+  /* Semantic hues */
+  --twb-red: #ff6e7a;
+  --twb-orange: #f7a35c;
+  --twb-violet: #b78cff;
+
+  /* Surfaces (graphite ramp) */
+  --twb-bg-0: #090c0d;
+  --twb-bg-1: #0e1214;
+  --twb-bg-2: #13191c;
+  --twb-bg-3: #182024;
+  --twb-bg-4: #202a2f;
+  --twb-border: #2a363d;
+  --twb-border-strong: #39484f;
+
+  /* Text */
+  --twb-text-normal: #dce4df;
+  --twb-text-soft: #b4c3bd;
+  --twb-text-muted: #879994;
+  --twb-text-faint: #63736f;
+  --twb-text-on-accent: #07100d;
+
+  /* Derived tints — static fallbacks (pre-mixed) */
+  --twb-selection: #63f2ab33;      /* accent @ 20% */
+  --twb-active-line: #6bdcff13;    /* accent-alt @ 7.5% */
+  --twb-nav-active: #63f2ab1b;     /* accent @ 10.5% */
+  --twb-blockquote-bg: #63f2ab12;  /* accent @ 7% */
+  --twb-tag-bg: #63f2ab21;         /* accent @ 13% */
+  --twb-tag-border: #63f2ab47;     /* accent @ 28% */
+  --twb-highlight: #f0c67438;      /* warm @ 22% */
+  --twb-focus-ring: #63f2ab2e;     /* accent @ 18% */
+  --twb-glow: 0 0 18px #63f2ab47;  /* accent @ 28%, opt-in */
+}
+
+/* ---------- Light (auto via system preference) ---------- */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+
+    --twb-accent: #007a4d;
+    --twb-accent-alt: #006f9e;
+    --twb-warm: #a46600;
+
+    --twb-red: #c8324c;
+    --twb-orange: #b65800;
+    --twb-violet: #7357b8;
+
+    --twb-bg-0: #f5f7f4;
+    --twb-bg-1: #edf2ee;
+    --twb-bg-2: #e2eae5;
+    --twb-bg-3: #d6e1db;
+    --twb-bg-4: #c8d5cf;
+    --twb-border: #bfcbc5;
+    --twb-border-strong: #9daea7;
+
+    --twb-text-normal: #17201d;
+    --twb-text-soft: #34443f;
+    --twb-text-muted: #60706a;
+    --twb-text-faint: #81918a;
+    --twb-text-on-accent: #f9fbf8;
+
+    --twb-selection: #007a4d2b;      /* accent @ 17% */
+    --twb-active-line: #006f9e13;
+    --twb-nav-active: #007a4d1b;
+    --twb-blockquote-bg: #007a4d12;
+    --twb-tag-bg: #007a4d21;
+    --twb-tag-border: #007a4d47;
+    --twb-highlight: #a4660038;
+    --twb-focus-ring: #007a4d2e;
+    --twb-glow: 0 0 18px #007a4d47;
+  }
+}
+
+/* ---------- Light (explicit opt-in) ---------- */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --twb-accent: #007a4d;
+  --twb-accent-alt: #006f9e;
+  --twb-warm: #a46600;
+
+  --twb-red: #c8324c;
+  --twb-orange: #b65800;
+  --twb-violet: #7357b8;
+
+  --twb-bg-0: #f5f7f4;
+  --twb-bg-1: #edf2ee;
+  --twb-bg-2: #e2eae5;
+  --twb-bg-3: #d6e1db;
+  --twb-bg-4: #c8d5cf;
+  --twb-border: #bfcbc5;
+  --twb-border-strong: #9daea7;
+
+  --twb-text-normal: #17201d;
+  --twb-text-soft: #34443f;
+  --twb-text-muted: #60706a;
+  --twb-text-faint: #81918a;
+  --twb-text-on-accent: #f9fbf8;
+
+  --twb-selection: #007a4d2b;
+  --twb-active-line: #006f9e13;
+  --twb-nav-active: #007a4d1b;
+  --twb-blockquote-bg: #007a4d12;
+  --twb-tag-bg: #007a4d21;
+  --twb-tag-border: #007a4d47;
+  --twb-highlight: #a4660038;
+  --twb-focus-ring: #007a4d2e;
+  --twb-glow: 0 0 18px #007a4d47;
+}
+
+/* ---------- Derived tints track the accent where color-mix exists ---------- */
+@supports (color: color-mix(in srgb, red 50%, transparent)) {
+  :root,
+  :root[data-theme="dark"] {
+    --twb-selection: color-mix(in srgb, var(--twb-accent) 20%, transparent);
+    --twb-active-line: color-mix(in srgb, var(--twb-accent-alt) 7.5%, transparent);
+    --twb-nav-active: color-mix(in srgb, var(--twb-accent) 10.5%, transparent);
+    --twb-blockquote-bg: color-mix(in srgb, var(--twb-accent) 7%, transparent);
+    --twb-tag-bg: color-mix(in srgb, var(--twb-accent) 13%, transparent);
+    --twb-tag-border: color-mix(in srgb, var(--twb-accent) 28%, transparent);
+    --twb-highlight: color-mix(in srgb, var(--twb-warm) 22%, transparent);
+    --twb-focus-ring: color-mix(in srgb, var(--twb-accent) 18%, transparent);
+    --twb-glow: 0 0 18px color-mix(in srgb, var(--twb-accent) 28%, transparent);
+  }
+
+  /* Selection is slightly weaker in light mode (17% vs 20%) */
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --twb-selection: color-mix(in srgb, var(--twb-accent) 17%, transparent);
+    }
+  }
+  :root[data-theme="light"] {
+    --twb-selection: color-mix(in srgb, var(--twb-accent) 17%, transparent);
+  }
+}
+
+/* ---------- Mode-independent tokens ---------- */
+:root {
+  /* Typography */
+  --twb-font-mono: "Berkeley Mono", "JetBrains Mono", "Cascadia Code",
+    "IBM Plex Mono", SFMono-Regular, Consolas, monospace;
+  --twb-font-ui: Inter, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+
+  --twb-line-height: 1.7;        /* prose */
+  --twb-line-height-tight: 1.45; /* UI */
+  --twb-line-height-code: 1.62;  /* code */
+
+  /* Shape */
+  --twb-radius-s: 4px;   /* tags, chips, checkboxes */
+  --twb-radius-m: 6px;   /* base: panels, inputs, code blocks */
+  --twb-radius-l: 8px;   /* large containers */
+  --twb-radius-pill: 999px; /* toggles, slider thumbs only */
+
+  --twb-border-width: 1px;
+
+  /* Elevation — menus, modals, popovers only */
+  --twb-shadow-pane: 0 20px 60px rgba(0, 0, 0, 0.22);
+
+  /* Motion — interactive state changes only; gate behind
+     prefers-reduced-motion in consuming styles */
+  --twb-transition: 120ms ease;
+}

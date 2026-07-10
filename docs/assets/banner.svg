@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800" viewBox="0 0 1600 800" role="img" aria-label="Gym Tracker — strength workouts and rucks in your vault">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#090c0d"/>
+      <stop offset="1" stop-color="#0e1214"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="800" fill="url(#bg)"/>
+
+  <!-- ============ left: wordmark ============ -->
+  <g font-family="'Cascadia Code','JetBrains Mono',Consolas,'DejaVu Sans Mono',monospace">
+    <!-- kicker -->
+    <path d="M120,179 l9,8 l-9,8" fill="none" stroke="#63f2ab" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="146" y="194" font-size="18" font-weight="700" letter-spacing="5" fill="#879994">OBSIDIAN PLUGIN</text>
+
+    <!-- title -->
+    <text x="116" y="300" font-size="86" font-weight="700" letter-spacing="3"><tspan fill="#dce4df">GYM</tspan><tspan fill="#63f2ab">&#160;TRACKER</tspan></text>
+    <line x1="120" y1="334" x2="740" y2="334" stroke="#2a363d" stroke-width="2"/>
+    <text x="120" y="382" font-size="17" font-weight="600" letter-spacing="4" fill="#879994">STRENGTH WORKOUTS &#38; RUCKS IN YOUR VAULT</text>
+
+    <!-- feature lines -->
+    <rect x="120" y="441" width="8" height="8" rx="2" fill="#63f2ab"/>
+    <text x="146" y="452" font-size="15" font-weight="600" letter-spacing="2" fill="#879994">SETS, REPS, RPE &#183; REST TIMER &#183; ROUTINES</text>
+    <rect x="120" y="485" width="8" height="8" rx="2" fill="#6bdcff"/>
+    <text x="146" y="496" font-size="15" font-weight="600" letter-spacing="2" fill="#879994">INSIGHTS &#183; STREAKS &#183; PERSONAL RECORDS</text>
+    <rect x="120" y="529" width="8" height="8" rx="2" fill="#f0c674"/>
+    <text x="146" y="540" font-size="15" font-weight="600" letter-spacing="2" fill="#879994">GPX IMPORT &#183; DATAVIEW-READY EXPORTS</text>
+
+    <!-- prompt line -->
+    <path d="M120,731 l8,7 l-8,7" fill="none" stroke="#63f2ab" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="142" y="744" font-size="16" fill="#63736f">gym log "bench press" --sets 5x5 --weight 225</text>
+    <rect x="548" y="730" width="9" height="18" fill="#63f2ab"/>
+  </g>
+
+  <!-- ============ right: workout pane ============ -->
+  <g font-family="'Cascadia Code','JetBrains Mono',Consolas,'DejaVu Sans Mono',monospace">
+    <rect x="880" y="110" width="600" height="580" rx="10" fill="#0e1214" stroke="#2a363d" stroke-width="1.5"/>
+    <line x1="880" y1="154" x2="1480" y2="154" stroke="#2a363d" stroke-width="1.5"/>
+    <circle cx="908" cy="132" r="5" fill="#39484f"/>
+    <circle cx="928" cy="132" r="5" fill="#39484f"/>
+    <circle cx="948" cy="132" r="5" fill="#39484f"/>
+    <text x="976" y="137" font-size="12" font-weight="700" letter-spacing="2.5" fill="#879994">GYM TRACKER &#8212; WORKOUT</text>
+
+    <!-- row 1: done -->
+    <rect x="910" y="191" width="16" height="16" rx="3" fill="none" stroke="#63f2ab" stroke-width="1.5"/>
+    <path d="M913.5,199 l4,4.5 l6.5,-8" fill="none" stroke="#63f2ab" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="944" y="204" font-size="15" fill="#b4c3bd">BENCH PRESS</text>
+    <text x="1450" y="204" font-size="13" fill="#879994" text-anchor="end">5&#215;5 &#183; 225 LB</text>
+
+    <!-- row 2: done -->
+    <rect x="910" y="245" width="16" height="16" rx="3" fill="none" stroke="#63f2ab" stroke-width="1.5"/>
+    <path d="M913.5,253 l4,4.5 l6.5,-8" fill="none" stroke="#63f2ab" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="944" y="258" font-size="15" fill="#b4c3bd">OVERHEAD PRESS</text>
+    <text x="1450" y="258" font-size="13" fill="#879994" text-anchor="end">4&#215;8 &#183; 115 LB</text>
+
+    <!-- row 3: active -->
+    <rect x="896" y="287" width="568" height="40" rx="6" fill="#63f2ab" opacity="0.13"/>
+    <rect x="896" y="287" width="3" height="40" fill="#63f2ab"/>
+    <rect x="910" y="299" width="16" height="16" rx="3" fill="#63f2ab" opacity="0.25" stroke="#63f2ab" stroke-width="1.5"/>
+    <text x="944" y="312" font-size="15" fill="#dce4df">BARBELL ROW</text>
+    <text x="1450" y="312" font-size="13" fill="#63f2ab" text-anchor="end">SET 3/5 &#183; 185 LB</text>
+
+    <!-- row 4: pending -->
+    <g opacity="0.55">
+      <rect x="910" y="353" width="16" height="16" rx="3" fill="none" stroke="#39484f" stroke-width="1.5"/>
+      <text x="944" y="366" font-size="15" fill="#63736f">PULL-UP</text>
+      <text x="1450" y="366" font-size="13" fill="#63736f" text-anchor="end">3&#215;8 &#183; BW</text>
+    </g>
+
+    <line x1="880" y1="404" x2="1480" y2="404" stroke="#2a363d" stroke-width="1.5"/>
+
+    <!-- weekly volume chart -->
+    <text x="910" y="444" font-size="11" font-weight="700" letter-spacing="2.5" fill="#63736f">WEEKLY VOLUME</text>
+    <text x="1450" y="444" font-size="11" font-weight="700" letter-spacing="2" fill="#63736f" text-anchor="end">LB</text>
+    <g>
+      <rect x="910"  y="556" width="40" height="40"  rx="3" fill="#39484f"/>
+      <rect x="977"  y="532" width="40" height="64"  rx="3" fill="#39484f"/>
+      <rect x="1044" y="544" width="40" height="52"  rx="3" fill="#39484f"/>
+      <rect x="1111" y="510" width="40" height="86"  rx="3" fill="#63736f"/>
+      <rect x="1178" y="522" width="40" height="74"  rx="3" fill="#63736f"/>
+      <rect x="1245" y="494" width="40" height="102" rx="3" fill="#63736f"/>
+      <rect x="1312" y="504" width="40" height="92"  rx="3" fill="#879994"/>
+      <rect x="1379" y="472" width="40" height="124" rx="3" fill="#63f2ab"/>
+    </g>
+    <line x1="910" y1="600" x2="1450" y2="600" stroke="#2a363d" stroke-width="1.5"/>
+
+    <!-- PR footer -->
+    <rect x="910" y="630" width="36" height="21" rx="4" fill="#f0c674" opacity="0.16"/>
+    <rect x="910" y="630" width="36" height="21" rx="4" fill="none" stroke="#f0c674" stroke-opacity="0.4" stroke-width="1"/>
+    <text x="928" y="645" font-size="10.5" font-weight="700" letter-spacing="1.5" fill="#f0c674" text-anchor="middle">PR</text>
+    <text x="960" y="645" font-size="12" letter-spacing="1.5" fill="#879994">DEADLIFT &#183; 315 LB &#215; 5</text>
+  </g>
+</svg>
