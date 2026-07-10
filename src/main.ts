@@ -244,8 +244,8 @@ export default class GymTrackerPlugin extends Plugin {
 		});
 
 		this.addCommand({
-			id: "open-gym-tracker",
-			name: "Open gym tracker",
+			id: "open-view",
+			name: "Open view",
 			callback: () => {
 				void this.activateView();
 			}
@@ -286,22 +286,27 @@ export default class GymTrackerPlugin extends Plugin {
 		this.addSettingTab(new GymTrackerSettingTab(this.app, this));
 	}
 
-	onunload() {
-		this.app.workspace.detachLeavesOfType(VIEW_TYPE_GYM_TRACKER);
-	}
-
 	async activateView() {
-		this.app.workspace.detachLeavesOfType(VIEW_TYPE_GYM_TRACKER);
-		const leaf = Platform.isMobile ? this.app.workspace.getLeaf(false) : this.app.workspace.getLeaf("tab");
-		await leaf.setViewState({ type: VIEW_TYPE_GYM_TRACKER, active: true });
-		this.app.workspace.revealLeaf(leaf);
+		const { workspace } = this.app;
+		const existing = workspace.getLeavesOfType(VIEW_TYPE_GYM_TRACKER)[0];
+		let leaf: WorkspaceLeaf;
+		if (existing) {
+			leaf = existing;
+		} else {
+			leaf = Platform.isMobile ? workspace.getLeaf(false) : workspace.getLeaf("tab");
+			await leaf.setViewState({ type: VIEW_TYPE_GYM_TRACKER, active: true });
+		}
+		await workspace.revealLeaf(leaf);
 	}
 
 	async loadSettings() {
-		const loaded = await this.loadData();
+		const loaded: unknown = await this.loadData();
+		const savedSettings = isRecord(loaded) && isRecord(loaded.settings)
+			? (loaded.settings as Partial<GymTrackerSettings>)
+			: {};
 		this.settings = {
 			...DEFAULT_SETTINGS,
-			...(isRecord(loaded?.settings) ? loaded.settings : {})
+			...savedSettings
 		};
 	}
 
@@ -310,8 +315,8 @@ export default class GymTrackerPlugin extends Plugin {
 	}
 
 	async loadWorkoutData() {
-		const loaded = await this.loadData();
-		this.data = normalizeTrackerData(loaded?.data);
+		const loaded: unknown = await this.loadData();
+		this.data = normalizeTrackerData(isRecord(loaded) ? loaded.data : undefined);
 		this.sortData();
 	}
 
@@ -1030,13 +1035,14 @@ class GymTrackerView extends ItemView {
 		}
 
 		const saveButton = footerActions.createEl("button", { text: "Save workout", cls: "mod-cta" });
-		saveButton.addEventListener("click", async () => {
-			const saved = await this.plugin.saveWorkout(this.activeWorkout);
-			if (saved) {
-				this.activeWorkout = createEmptyWorkout(this.plugin);
-				this.routineDraftName = "";
-				this.render();
-			}
+		saveButton.addEventListener("click", () => {
+			void this.plugin.saveWorkout(this.activeWorkout).then((saved) => {
+				if (saved) {
+					this.activeWorkout = createEmptyWorkout(this.plugin);
+					this.routineDraftName = "";
+					this.render();
+				}
+			});
 		});
 	}
 
@@ -1423,7 +1429,7 @@ class GymTrackerView extends ItemView {
 		const workoutsByDate = groupWorkoutsByDate(workouts);
 
 		const heading = calendarPanel.createDiv({ cls: "gym-calendar-heading" });
-		const previous = heading.createEl("button", { text: "Prev", cls: "gym-compact-button" });
+		const previous = heading.createEl("button", { text: "Prev", cls: "gym-compact-button gym-calendar-prev" });
 		previous.addEventListener("click", () => {
 			this.calendarCursor = addMonths(this.calendarCursor, -1);
 			this.selectedCalendarDate = formatDate(this.calendarCursor);
@@ -1434,15 +1440,14 @@ class GymTrackerView extends ItemView {
 		titleGroup.createEl("h3", { text: formatMonthTitle(this.calendarCursor) });
 		titleGroup.createSpan({ text: `${workouts.filter((workout) => isSameMonth(parseLocalDate(workout.date), this.calendarCursor)).length} workouts` });
 
-		const controls = heading.createDiv({ cls: "gym-calendar-controls" });
-		const today = controls.createEl("button", { text: "Today", cls: "gym-compact-button" });
+		const today = heading.createEl("button", { text: "Today", cls: "gym-compact-button gym-calendar-today" });
 		today.addEventListener("click", () => {
 			const now = new Date();
 			this.calendarCursor = getStartOfMonth(now);
 			this.selectedCalendarDate = getTodayDate();
 			this.render();
 		});
-		const next = controls.createEl("button", { text: "Next", cls: "gym-compact-button" });
+		const next = heading.createEl("button", { text: "Next", cls: "gym-compact-button gym-calendar-next" });
 		next.addEventListener("click", () => {
 			this.calendarCursor = addMonths(this.calendarCursor, 1);
 			this.selectedCalendarDate = formatDate(this.calendarCursor);
@@ -1724,13 +1729,14 @@ class GymTrackerView extends ItemView {
 
 	private openRoutineModal() {
 		const defaultName = this.routineDraftName || `${this.activeWorkout.type || this.plugin.settings.defaultWorkoutType} Routine`;
-		new RoutineNameModal(this.app, defaultName, async (name) => {
-			const saved = await this.plugin.saveRoutineFromWorkout(this.activeWorkout, name);
-			if (saved) {
-				this.routineDraftName = "";
-				this.activeTab = "routines";
-				this.render();
-			}
+		new RoutineNameModal(this.app, defaultName, (name) => {
+			void this.plugin.saveRoutineFromWorkout(this.activeWorkout, name).then((saved) => {
+				if (saved) {
+					this.routineDraftName = "";
+					this.activeTab = "routines";
+					this.render();
+				}
+			});
 		}).open();
 	}
 
@@ -1767,14 +1773,14 @@ class GymTrackerView extends ItemView {
 		const input = activeDocument.createElement("input");
 		input.type = "file";
 		input.accept = ".gpx,application/gpx+xml,text/xml,application/xml";
-		input.addEventListener("change", async () => {
+		input.addEventListener("change", () => {
 			const file = input.files?.[0];
 			if (!file) {
 				return;
 			}
 
-			try {
-				const summary = parseGpxSummary(await file.text(), file.name);
+			void file.text().then((contents) => {
+				const summary = parseGpxSummary(contents, file.name);
 				if (!summary) {
 					new Notice("Could not find track points in that GPX file.");
 					return;
@@ -1782,10 +1788,10 @@ class GymTrackerView extends ItemView {
 
 				this.applyGpxSummary(summary);
 				new Notice(`Imported GPX: ${summary.distanceKilometers.toFixed(2)} km.`);
-			} catch (error) {
+			}).catch((error: unknown) => {
 				console.error("Gym Tracker GPX import failed", error);
 				new Notice("Could not import that GPX file.");
-			}
+			});
 		}, { once: true });
 		input.click();
 	}
@@ -1916,8 +1922,6 @@ class GymTrackerSettingTab extends PluginSettingTab {
 	display() {
 		const { containerEl } = this;
 		containerEl.empty();
-
-		(new Setting(containerEl) as any).setHeading().setName("Gym Tracker");
 
 		new Setting(containerEl)
 			.setName("Demo data")

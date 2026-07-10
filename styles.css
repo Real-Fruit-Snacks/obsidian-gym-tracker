@@ -130,7 +130,7 @@
 }
 
 .gym-section-heading {
-	column-gap: 16px;
+	gap: 8px 16px;
 	justify-content: space-between;
 	margin: 20px 0 14px;
 	min-height: 36px;
@@ -633,7 +633,7 @@
 	align-items: center;
 	display: grid;
 	gap: 8px;
-	grid-template-columns: auto minmax(0, 1fr) auto;
+	grid-template-columns: auto minmax(0, 1fr) auto auto;
 	margin-bottom: 14px;
 }
 
@@ -654,12 +654,6 @@
 .gym-calendar-title span {
 	color: var(--gym-muted);
 	font-size: var(--font-ui-small);
-}
-
-.gym-calendar-controls {
-	display: flex;
-	gap: 8px;
-	justify-content: flex-end;
 }
 
 .gym-calendar-detail-actions {
@@ -932,30 +926,25 @@
 		font-size: 1.25em;
 	}
 
-	.gym-calendar-controls {
-		display: contents;
-	}
-
-	.gym-calendar-controls button,
 	.gym-calendar-heading > button {
 		margin-left: 0;
 		min-width: 0;
 	}
 
-	.gym-calendar-controls button:first-child {
-		grid-column: 1 / -1;
-		grid-row: 2;
-		justify-self: stretch;
+	.gym-calendar-prev {
+		grid-column: 1;
+		grid-row: 1;
 	}
 
-	.gym-calendar-controls button:last-child {
+	.gym-calendar-next {
 		grid-column: 3;
 		grid-row: 1;
 	}
 
-	.gym-calendar-heading > button {
-		grid-column: 1;
-		grid-row: 1;
+	.gym-calendar-today {
+		grid-column: 1 / -1;
+		grid-row: 2;
+		justify-self: stretch;
 	}
 
 	.gym-calendar-weekdays,

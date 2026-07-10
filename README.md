@@ -6,7 +6,7 @@
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-63f2ab.svg)](LICENSE)
   [![Latest release](https://img.shields.io/github/v/release/Real-Fruit-Snacks/obsidian-gym-tracker?color=6bdcff&label=release)](https://github.com/Real-Fruit-Snacks/obsidian-gym-tracker/releases)
-  [![Obsidian](https://img.shields.io/badge/Obsidian-1.5.0%2B-f0c674.svg)](https://obsidian.md)
+  [![Obsidian](https://img.shields.io/badge/Obsidian-1.7.2%2B-f0c674.svg)](https://obsidian.md)
 
   [Documentation](https://real-fruit-snacks.github.io/obsidian-gym-tracker/) · [Report an issue](https://github.com/Real-Fruit-Snacks/obsidian-gym-tracker/issues) · [Contributing](CONTRIBUTING.md)
 
@@ -30,7 +30,7 @@ Your training log belongs next to your notes, not in another subscription app. G
 
 ## Installation
 
-**Requires Obsidian 1.5.0 or newer.**
+**Requires Obsidian 1.7.2 or newer.**
 
 ### Community plugins (recommended)
 
@@ -54,7 +54,7 @@ Copy or symlink the repository into `<your-vault>/.obsidian/plugins/gym-tracker/
 
 ## Getting started
 
-1. **Open Gym Tracker** — click the dumbbell ribbon icon or run **Open gym tracker** from the command palette.
+1. **Open Gym Tracker** — click the dumbbell ribbon icon or run **Gym Tracker: Open view** from the command palette.
 2. **Log a session** — build a strength or ruck draft, load a routine, import a GPX file, run the rest timer, and save.
 3. **Review and export** — check Insights for trends and records, then export sessions as Markdown notes for the rest of your vault.
 
@@ -73,7 +73,7 @@ Copy or symlink the repository into `<your-vault>/.obsidian/plugins/gym-tracker/
 
 | Command | Description |
 | --- | --- |
-| Open gym tracker | Open the Gym Tracker view |
+| Open view | Open the Gym Tracker view |
 | Export latest workout to note | Write the most recent workout to a Markdown note |
 | Export tracker backup JSON | Create a portable JSON backup in the export folder |
 | Load demo data | Fill the tracker with sample data to explore the views |
