@@ -1,5 +1,6 @@
 import {
 	App,
+	Debouncer,
 	ItemView,
 	Modal,
 	Notice,
@@ -9,6 +10,7 @@ import {
 	Setting,
 	TFile,
 	WorkspaceLeaf,
+	debounce,
 	normalizePath
 } from "obsidian";
 
@@ -229,6 +231,12 @@ const TRACKER_TABS: Array<{ id: GymTrackerTab; label: string }> = [
 export default class GymTrackerPlugin extends Plugin {
 	settings: GymTrackerSettings = DEFAULT_SETTINGS;
 	data: GymTrackerData = createDefaultTrackerData();
+	draft: WorkoutEntry | null = null;
+	private saveSettingsDebounced: Debouncer<[], Promise<void>> = debounce(
+		() => this.savePluginState(),
+		500,
+		true
+	);
 
 	async onload() {
 		await this.loadSettings();
@@ -286,6 +294,10 @@ export default class GymTrackerPlugin extends Plugin {
 		this.addSettingTab(new GymTrackerSettingTab(this.app, this));
 	}
 
+	onunload() {
+		this.saveSettingsDebounced.run();
+	}
+
 	async activateView() {
 		const { workspace } = this.app;
 		const existing = workspace.getLeavesOfType(VIEW_TYPE_GYM_TRACKER)[0];
@@ -311,12 +323,13 @@ export default class GymTrackerPlugin extends Plugin {
 	}
 
 	async saveSettings() {
-		await this.savePluginState();
+		this.saveSettingsDebounced();
 	}
 
 	async loadWorkoutData() {
 		const loaded: unknown = await this.loadData();
 		this.data = normalizeTrackerData(isRecord(loaded) ? loaded.data : undefined);
+		this.draft = isRecord(loaded) ? normalizeWorkout(loaded.draft) : null;
 		this.sortData();
 	}
 
@@ -352,6 +365,7 @@ export default class GymTrackerPlugin extends Plugin {
 			this.data.workouts.unshift(cleanWorkout);
 		}
 
+		this.draft = null;
 		this.sortData();
 		await this.savePluginState();
 
@@ -490,47 +504,57 @@ export default class GymTrackerPlugin extends Plugin {
 	}
 
 	async exportTrackerBackup() {
-		const folder = normalizePath(this.settings.exportFolder.trim() || "Gym/Workouts");
-		await this.ensureFolder(folder);
+		try {
+			const folder = normalizePath(this.settings.exportFolder.trim() || "Gym/Workouts");
+			await this.ensureFolder(folder);
 
-		const path = normalizePath(`${folder}/gym-tracker-backup-${getTodayDate()}.json`);
-		const backup = JSON.stringify(
-			{
-				exportedAt: new Date().toISOString(),
-				settings: this.settings,
-				data: this.data
-			},
-			null,
-			2
-		);
-		const existing = this.app.vault.getAbstractFileByPath(path);
+			const path = normalizePath(`${folder}/gym-tracker-backup-${getTodayDate()}.json`);
+			const backup = JSON.stringify(
+				{
+					exportedAt: new Date().toISOString(),
+					settings: this.settings,
+					data: this.data
+				},
+				null,
+				2
+			);
+			const existing = this.app.vault.getAbstractFileByPath(path);
 
-		if (existing instanceof TFile) {
-			await this.app.vault.modify(existing, backup);
-		} else {
-			await this.app.vault.create(path, backup);
+			if (existing instanceof TFile) {
+				await this.app.vault.modify(existing, backup);
+			} else {
+				await this.app.vault.create(path, backup);
+			}
+
+			new Notice(`Exported ${path}`);
+		} catch (error) {
+			console.error("Gym Tracker: backup export failed", error);
+			new Notice("Could not export the backup file.");
 		}
-
-		new Notice(`Exported ${path}`);
 	}
 
 	async exportWorkout(workout: WorkoutEntry, silent = false) {
-		const folder = normalizePath(this.settings.exportFolder.trim() || "Gym/Workouts");
-		await this.ensureFolder(folder);
+		try {
+			const folder = normalizePath(this.settings.exportFolder.trim() || "Gym/Workouts");
+			await this.ensureFolder(folder);
 
-		const safeType = workout.type.replace(/[\\/#^|[\]:]/g, "").trim() || "Workout";
-		const path = normalizePath(`${folder}/${workout.date} ${safeType}.md`);
-		const markdown = this.formatWorkoutMarkdown(workout);
-		const existing = this.app.vault.getAbstractFileByPath(path);
+			const safeType = workout.type.replace(/[\\/#^|[\]:]/g, "").trim() || "Workout";
+			const path = normalizePath(`${folder}/${workout.date} ${safeType}.md`);
+			const markdown = this.formatWorkoutMarkdown(workout);
+			const existing = this.app.vault.getAbstractFileByPath(path);
 
-		if (existing instanceof TFile) {
-			await this.app.vault.modify(existing, markdown);
-		} else {
-			await this.app.vault.create(path, markdown);
-		}
+			if (existing instanceof TFile) {
+				await this.app.vault.modify(existing, markdown);
+			} else {
+				await this.app.vault.create(path, markdown);
+			}
 
-		if (!silent) {
-			new Notice(`Exported ${path}`);
+			if (!silent) {
+				new Notice(`Exported ${path}`);
+			}
+		} catch (error) {
+			console.error("Gym Tracker: workout export failed", error);
+			new Notice("Could not export the workout note.");
 		}
 	}
 
@@ -652,6 +676,7 @@ export default class GymTrackerPlugin extends Plugin {
 
 	async clearTrackerData() {
 		this.data = createDefaultTrackerData();
+		this.draft = null;
 		await this.savePluginState();
 		this.refreshViews();
 		new Notice("Tracker data cleared.");
@@ -696,10 +721,11 @@ export default class GymTrackerPlugin extends Plugin {
 		this.data.exerciseLibrary.sort((a, b) => a.name.localeCompare(b.name));
 	}
 
-	private async savePluginState() {
+	async savePluginState() {
 		await this.saveData({
 			settings: this.settings,
-			data: this.data
+			data: this.data,
+			draft: this.draft
 		});
 	}
 
@@ -717,18 +743,23 @@ export default class GymTrackerPlugin extends Plugin {
 	}
 
 	private async createExerciseNotesForWorkout(workout: WorkoutEntry) {
-		const folder = normalizePath(this.settings.exerciseFolder.trim() || DEFAULT_SETTINGS.exerciseFolder);
-		await this.ensureFolder(folder);
-		const uniqueExercises = uniqueStrings(workout.exercises.map((exercise) => exercise.name));
+		try {
+			const folder = normalizePath(this.settings.exerciseFolder.trim() || DEFAULT_SETTINGS.exerciseFolder);
+			await this.ensureFolder(folder);
+			const uniqueExercises = uniqueStrings(workout.exercises.map((exercise) => exercise.name));
 
-		for (const exerciseName of uniqueExercises) {
-			const path = normalizePath(`${folder}/${sanitizeFileName(exerciseName)}.md`);
-			const existing = this.app.vault.getAbstractFileByPath(path);
-			if (existing) {
-				continue;
+			for (const exerciseName of uniqueExercises) {
+				const path = normalizePath(`${folder}/${sanitizeFileName(exerciseName)}.md`);
+				const existing = this.app.vault.getAbstractFileByPath(path);
+				if (existing) {
+					continue;
+				}
+
+				await this.app.vault.create(path, formatExerciseNote(exerciseName, this.data.exerciseLibrary, this.settings.exportFolder));
 			}
-
-			await this.app.vault.create(path, formatExerciseNote(exerciseName, this.data.exerciseLibrary, this.settings.exportFolder));
+		} catch (error) {
+			console.error("Gym Tracker: exercise note creation failed", error);
+			new Notice("Could not create exercise notes.");
 		}
 	}
 }
@@ -753,7 +784,7 @@ class GymTrackerView extends ItemView {
 	constructor(leaf: WorkspaceLeaf, plugin: GymTrackerPlugin) {
 		super(leaf);
 		this.plugin = plugin;
-		this.activeWorkout = createEmptyWorkout(this.plugin);
+		this.activeWorkout = plugin.draft ? cloneWorkout(plugin.draft) : createEmptyWorkout(this.plugin);
 		this.timerRemainingSeconds = this.plugin.settings.defaultRestSeconds;
 	}
 
@@ -775,6 +806,10 @@ class GymTrackerView extends ItemView {
 
 	async onClose() {
 		this.stopTimerInterval();
+		this.plugin.draft = isWorkoutDraftDirty(this.activeWorkout, this.plugin)
+			? cloneWorkout(this.activeWorkout)
+			: null;
+		await this.plugin.savePluginState();
 	}
 
 	render() {
@@ -1849,7 +1884,7 @@ class GymTrackerView extends ItemView {
 		this.timerRemainingSeconds = Math.max(0, Math.round(seconds));
 		this.timerRunning = true;
 		this.stopTimerInterval();
-		this.timerInterval = window.setInterval(() => {
+		this.timerInterval = this.registerInterval(window.setInterval(() => {
 			this.timerRemainingSeconds = Math.max(0, this.timerRemainingSeconds - 1);
 			this.updateTimerDisplay();
 
@@ -1857,7 +1892,7 @@ class GymTrackerView extends ItemView {
 				this.pauseRestTimer();
 				new Notice("Rest complete.");
 			}
-		}, 1000);
+		}, 1000));
 		this.updateTimerDisplay();
 	}
 
@@ -2290,12 +2325,12 @@ function createChipRow(parent: HTMLElement, values: string[]) {
 }
 
 function parseGpxSummary(gpxText: string, fileName: string): GpxImportSummary | null {
-	const document = new DOMParser().parseFromString(gpxText, "application/xml");
-	if (activeDocument.querySelector("parsererror")) {
+	const gpxDocument = new DOMParser().parseFromString(gpxText, "application/xml");
+	if (gpxDocument.querySelector("parsererror")) {
 		return null;
 	}
 
-	const points = getGpxPoints(document);
+	const points = getGpxPoints(gpxDocument);
 	if (points.length < 2) {
 		return null;
 	}
@@ -2326,15 +2361,15 @@ function parseGpxSummary(gpxText: string, fileName: string): GpxImportSummary | 
 		distanceKilometers: roundNumber(distanceKilometers),
 		durationMinutes,
 		elevationGainMeters: roundNumber(elevationGainMeters),
-		name: getGpxName(document, fileName),
+		name: getGpxName(gpxDocument, fileName),
 		startDate: firstTime ? formatDate(firstTime) : ""
 	};
 }
 
-function getGpxPoints(document: Document) {
+function getGpxPoints(gpxDocument: Document) {
 	return [
-		...Array.from(activeDocument.getElementsByTagName("trkpt")),
-		...Array.from(activeDocument.getElementsByTagName("rtept"))
+		...Array.from(gpxDocument.getElementsByTagName("trkpt")),
+		...Array.from(gpxDocument.getElementsByTagName("rtept"))
 	]
 		.map((point) => {
 			const lat = Number(point.getAttribute("lat"));
@@ -2353,10 +2388,10 @@ function getGpxPoints(document: Document) {
 		.filter((point) => Number.isFinite(point.lat) && Number.isFinite(point.lon));
 }
 
-function getGpxName(document: Document, fileName: string) {
-	const trackName = activeDocument.getElementsByTagName("trk")[0]?.getElementsByTagName("name")[0]?.textContent;
-	const routeName = activeDocument.getElementsByTagName("rte")[0]?.getElementsByTagName("name")[0]?.textContent;
-	const metadataName = activeDocument.getElementsByTagName("metadata")[0]?.getElementsByTagName("name")[0]?.textContent;
+function getGpxName(gpxDocument: Document, fileName: string) {
+	const trackName = gpxDocument.getElementsByTagName("trk")[0]?.getElementsByTagName("name")[0]?.textContent;
+	const routeName = gpxDocument.getElementsByTagName("rte")[0]?.getElementsByTagName("name")[0]?.textContent;
+	const metadataName = gpxDocument.getElementsByTagName("metadata")[0]?.getElementsByTagName("name")[0]?.textContent;
 	return (trackName || routeName || metadataName || fileName.replace(/\.gpx$/i, "")).trim();
 }
 
@@ -2513,6 +2548,7 @@ function cloneSetTemplate(set?: WorkoutSetEntry): WorkoutSetEntry {
 function cloneWorkout(workout: WorkoutEntry): WorkoutEntry {
 	return {
 		...workout,
+		ruck: { ...workout.ruck },
 		exercises: workout.exercises.map((exercise) => ({
 			...exercise,
 			sets: exercise.sets.map((set) => ({ ...set }))
