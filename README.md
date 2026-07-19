@@ -140,12 +140,14 @@ obsidian-gym-tracker/
 ├── manifest.json        Plugin metadata
 ├── versions.json        Plugin version → minimum Obsidian version map
 ├── src/main.ts          Plugin source (TypeScript, single file)
+├── tests/               Vitest unit tests for the data layer
 ├── styles.css           Plugin styles
 ├── esbuild.config.mjs   Build configuration
 └── docs/                Documentation site and artwork
 ```
 
 - **Single-file source** — the whole plugin lives in `src/main.ts`, bundled with esbuild.
+- **Tested data layer** — the data normalizers, volume/pace math, and Markdown/YAML escaping are covered by a Vitest suite (`npm test`), which also runs in CI on every push and before each release.
 - **Safe writes** — the only notes the plugin creates or updates are the exports you ask for (workout notes, exercise notes, backups), inside the folders you configure.
 - **No network, no telemetry** — the plugin never talks to the network.
 
