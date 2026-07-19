@@ -2604,7 +2604,7 @@ function getDefaultExercises(plugin: GymTrackerPlugin) {
 	return uniqueStrings([...libraryExercises, ...settingExercises]);
 }
 
-function normalizeTrackerData(rawData: unknown): GymTrackerData {
+export function normalizeTrackerData(rawData: unknown): GymTrackerData {
 	if (!isRecord(rawData)) {
 		return createDefaultTrackerData();
 	}
@@ -2936,7 +2936,7 @@ function roundToNearest(value: number, step: number) {
 	return roundNumber(Math.round(value / step) * step);
 }
 
-function normalizeWorkout(raw: unknown): WorkoutEntry | null {
+export function normalizeWorkout(raw: unknown): WorkoutEntry | null {
 	if (!isRecord(raw)) {
 		return null;
 	}
@@ -2972,7 +2972,7 @@ function normalizeDraftRuck(ruck: RuckEntry): RuckEntry {
 	};
 }
 
-function normalizeRuck(raw: unknown): RuckEntry {
+export function normalizeRuck(raw: unknown): RuckEntry {
 	if (!isRecord(raw)) {
 		return createEmptyRuck();
 	}
@@ -2988,7 +2988,7 @@ function normalizeRuck(raw: unknown): RuckEntry {
 	};
 }
 
-function normalizeWorkoutMode(value: string): WorkoutMode {
+export function normalizeWorkoutMode(value: string): WorkoutMode {
 	return value === "ruck" ? "ruck" : "strength";
 }
 
@@ -3012,7 +3012,7 @@ function normalizeDraftExercise(exercise: ExerciseEntry): ExerciseEntry {
 	};
 }
 
-function normalizeExercise(raw: unknown): ExerciseEntry | null {
+export function normalizeExercise(raw: unknown): ExerciseEntry | null {
 	if (!isRecord(raw)) {
 		return null;
 	}
@@ -3029,7 +3029,7 @@ function normalizeExercise(raw: unknown): ExerciseEntry | null {
 	};
 }
 
-function normalizeWorkoutSet(raw: unknown): WorkoutSetEntry | null {
+export function normalizeWorkoutSet(raw: unknown): WorkoutSetEntry | null {
 	if (!isRecord(raw)) {
 		return null;
 	}
@@ -3149,7 +3149,7 @@ function normalizeSetKind(value: string): SetKind {
 	return "working";
 }
 
-function calculateSetVolume(set: WorkoutSetEntry) {
+export function calculateSetVolume(set: WorkoutSetEntry) {
 	if (!set.completed) {
 		return 0;
 	}
@@ -3157,15 +3157,15 @@ function calculateSetVolume(set: WorkoutSetEntry) {
 	return roundNumber(set.reps * set.weight);
 }
 
-function calculateExerciseVolume(exercise: ExerciseEntry) {
+export function calculateExerciseVolume(exercise: ExerciseEntry) {
 	return roundNumber(exercise.sets.reduce((sum, set) => sum + calculateSetVolume(set), 0));
 }
 
-function calculateWorkoutVolume(workout: WorkoutEntry) {
+export function calculateWorkoutVolume(workout: WorkoutEntry) {
 	return roundNumber(workout.exercises.reduce((sum, exercise) => sum + calculateExerciseVolume(exercise), 0));
 }
 
-function calculateRuckPace(workout: WorkoutEntry) {
+export function calculateRuckPace(workout: WorkoutEntry) {
 	if (workout.mode !== "ruck" || workout.ruck.distance <= 0 || workout.durationMinutes <= 0) {
 		return 0;
 	}
@@ -3173,7 +3173,7 @@ function calculateRuckPace(workout: WorkoutEntry) {
 	return roundNumber(workout.durationMinutes / workout.ruck.distance);
 }
 
-function calculateRuckLoadDistance(workout: WorkoutEntry) {
+export function calculateRuckLoadDistance(workout: WorkoutEntry) {
 	if (workout.mode !== "ruck") {
 		return 0;
 	}
@@ -3191,7 +3191,7 @@ function getRuckDistanceInMiles(workout: WorkoutEntry) {
 		: workout.ruck.distance;
 }
 
-function countCompletedSets(workout: WorkoutEntry) {
+export function countCompletedSets(workout: WorkoutEntry) {
 	return workout.exercises.reduce(
 		(sum, exercise) => sum + exercise.sets.filter((set) => set.completed).length,
 		0
@@ -3421,7 +3421,7 @@ function calculateStreakDays(workouts: WorkoutEntry[]) {
 	return streak;
 }
 
-function compareWorkoutsDesc(a: WorkoutEntry, b: WorkoutEntry) {
+export function compareWorkoutsDesc(a: WorkoutEntry, b: WorkoutEntry) {
 	return b.date.localeCompare(a.date) || b.updatedAt.localeCompare(a.updatedAt);
 }
 
@@ -3510,11 +3510,11 @@ function createEmptyExerciseDefinition(): ExerciseDefinition {
 	};
 }
 
-function roundNumber(value: number) {
+export function roundNumber(value: number) {
 	return Math.round(value * 100) / 100;
 }
 
-function clampNumber(value: number, min: number, max: number) {
+export function clampNumber(value: number, min: number, max: number) {
 	if (!Number.isFinite(value)) {
 		return min;
 	}
@@ -3532,7 +3532,7 @@ function formatSetKind(value: SetKind) {
 	return SET_TYPES.find((type) => type.value === value)?.label ?? "Working";
 }
 
-function uniqueStrings(values: string[]) {
+export function uniqueStrings(values: string[]) {
 	const seen = new Set<string>();
 	const unique: string[] = [];
 
@@ -3550,7 +3550,7 @@ function uniqueStrings(values: string[]) {
 	return unique;
 }
 
-function sanitizeFileName(value: string) {
+export function sanitizeFileName(value: string) {
 	return value.replace(/[\\/#^|[\]:]/g, "").trim() || "Exercise";
 }
 
@@ -3585,11 +3585,11 @@ function formatExerciseNote(exerciseName: string, library: ExerciseDefinition[],
 	].join("\n");
 }
 
-function escapeTableCell(value: string) {
+export function escapeTableCell(value: string) {
 	return value.replace(/\|/g, "\\|").replace(/\n/g, " ");
 }
 
-function quoteYaml(value: string) {
+export function quoteYaml(value: string) {
 	return `"${value.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
 }
 

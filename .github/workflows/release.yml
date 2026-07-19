@@ -24,6 +24,7 @@ jobs:
       - name: Build plugin
         run: |
           npm ci
+          npm test
           npm run build
 
       - name: Attest build provenance
@@ -33,12 +34,12 @@ jobs:
             main.js
             styles.css
 
-      - name: Create draft release
+      - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           tag="${GITHUB_REF#refs/tags/}"
           gh release create "$tag" \
             --title="$tag" \
-            --draft \
+            --generate-notes \
             main.js manifest.json styles.css
